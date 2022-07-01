@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="/Css/darkmode.css">
+    <link rel="stylesheet" href="/Css/phone.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+   
+     <div class="container">
+        <div class="phone-body">
+            <div class="HomePage">
+                <div id="toggle">
+                    <i class="indicator"></i>
+                 </div>
+                <img src="/Css/to-do-list.png" alt="" class="pic">
+                <h2>Todo App</h2>
+                <div class="Content">
+                    <h1>What you do Tomorrow</h1>
+                    <p>Welcome to Todo App. This app will help you always</p>
+                    <a href="#" onclick="nextClick()" class="nextBtn"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+    
+            <div class="homePage">
+                <div class="header">
+                    <a href="#" class="menuBar"><i class="fa-solid fa-bars"></i></a>
+                    <div class="searchBox">
+                        <form action="/" class="form" method="POST">
+                        <input type="text" name="ToDos" class="search" id=""placeholder="Add a todo" >
+                        <button type="submit" class="searchBtn"><i class="fa-solid fa-plus"></i></button>
+                       </form>
+                    </div>
+                </div>
+               <div class="Homecontent">
+                <h2>Today <h4 id="td-date"></h4></h2>
+               
+                <div class="lists">
+                      <% if (result.length>0) { %>
+                      <% result.map((value,index)=>{%>
+                    <div class="list">
+                     <span class="time_date">
+                        <i class="fa-solid fa-ellipsis-v" aria-hidden="true"></i>
+                     </span> 
+                     <p class="text"> <strong><%= index+1 %></strong><%= value.ToDos %></p> 
+                     <span style="display:flex;">
+                        <form action="/delete" method="post">
+                            <input type="hidden" value="<%= value._id %>" name="uniqueID">
+                            <button class="btn btn1">Delete</button>
+                        </form>
+                        <form action="/edit" method="post">
+                        <input type="hidden" value="<%= value._id %>" name="uniqueID">
+                        <button class="btn btn2">Edit</button>
+                       </form>
+                    </span>
+                    </div>
+                    <%})%> 
+                    <% } else{ %>
+                <h1>Empty list</h1>
+                <% } %> 
+                </div>
+        
+               </div> 
+            </div>
+
+    
+        </div>
+       </div> 
+      
+       <div>
+
+ <script>
+    td= new Date().getUTCDate();
+    document.querySelector('#td-date').value=td;
+    const body = document.querySelector('body')
+    const toggle = document.getElementById('toggle');
+    toggle.onclick= function(){
+        toggle.classList.toggle('active');
+        body.classList.toggle('active')
+
+    }
+    nextClick=()=>{
+        document.querySelector('.homePage').style.left='0%';
+        document.querySelector('.homePage').style.visibility='visible'
+
+    }
+ </script>
+</body>
+</html>
+   
+   
+  
